@@ -30,6 +30,7 @@ class Main extends Component {
 
     }
 
+
     removePhoto(postRemoved){
         console.log(postRemoved.description)
         this.setState((state) => ({
@@ -38,22 +39,36 @@ class Main extends Component {
         }))
     }
 
+    addPhoto(postSubmitted){
+        this.setState(state => ({
+            posts: state.posts.concat([postSubmitted])
+        }))
+    }
+
+
     // lifecycle method that gets executed after everything gets inserted into DOM 
     componentDidMount(){}
     
+    componentDidUpdate(prevProps,prevState){
+        console.log(prevState.posts)
+        console.log(this.state)
+    }
 
     render(){
         return(
             <div>
-           
                  <Route exact path ="/" render={() => (
                     <div>
                         <Title title={"Photowall"}></Title>
                         <Photowall posts={this.state.posts} onRemovePhoto={this.removePhoto} onNavigate = {this.navigate}/> 
                     </div>
-
                  )}/>
-                <Route path="/AddPhoto" component ={AddPhoto}/>
+                <Route path="/AddPhoto" render={({history}) => (
+                        <AddPhoto onAddPhoto={(addedPost) => {
+                            this.addPhoto(addedPost)
+                            history.push('/')
+                        }}/>
+                )}/>
             </div>
 
         )
