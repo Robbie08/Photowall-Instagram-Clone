@@ -5,7 +5,6 @@ import {Link} from 'react-router-dom'
 // anchor tag, href attribute
 function Photowall(props){
     return <div>
-
             <Link className="addIcon"  to="/AddPhoto">+</Link>
             <div className="photo-grid">
                 {props.posts

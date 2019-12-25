@@ -3,6 +3,8 @@ import Title from './Title'
 import Photowall from './Photowall'
 import AddPhoto from './AddPhoto'
 import {Route} from 'react-router-dom'
+
+// main class
 class Main extends Component {
     constructor(){
         super()
@@ -39,6 +41,8 @@ class Main extends Component {
         }))
     }
 
+    // function that will take in a postSubmitted as prop, then will
+    // concatonate the new object into our old list of posts(objects)
     addPhoto(postSubmitted){
         this.setState(state => ({
             posts: state.posts.concat([postSubmitted])
@@ -49,6 +53,8 @@ class Main extends Component {
     // lifecycle method that gets executed after everything gets inserted into DOM 
     componentDidMount(){}
     
+
+    // lifecycle method that gets executed after re-render
     componentDidUpdate(prevProps,prevState){
         console.log(prevState.posts)
         console.log(this.state)
@@ -56,16 +62,16 @@ class Main extends Component {
 
 
     render(){
-        console.log(this.state.posts)
+        console.log(this.state.posts) // log the current posts
         return(
             <div>
                 {/*if the url has '/' then we must render the home page UI*/}
-                 <Route exact path ="/" render={() => (
+                <Route exact path ="/" render={() => (
                     <div>
                         <Title title={"Photowall"}></Title>
                         <Photowall posts={this.state.posts} onRemovePhoto={this.removePhoto} onNavigate = {this.navigate}/> 
                     </div>
-                 )}/>
+                )}/>
 
                  {/*if the url has the /AddPhoto path then we must render the addPhoto UI  */}
                 <Route path="/AddPhoto" render={({history}) => (

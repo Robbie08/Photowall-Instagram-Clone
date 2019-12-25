@@ -6,6 +6,11 @@ class AddPhoto extends Component{
         super()
         this.handleSubmit = this.handleSubmit.bind(this)
     }
+
+
+    // function that will take in prop as event
+    // then this function will grab the data from the link and description
+    // and then store it into an object
     handleSubmit(event){
         event.preventDefault()
         const imageLink = event.target.elements.Link.value
@@ -15,7 +20,6 @@ class AddPhoto extends Component{
             description: description,
             imageLink: imageLink,
         }
-
         if(description && imageLink){
             this.props.onAddPhoto(post)
         }
